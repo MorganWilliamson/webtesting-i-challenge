@@ -5,8 +5,16 @@ module.exports = {
   get,
 };
 
+// 1) Take in an item object.
+// 2) Increase enhancement score by 1.
+// NOTE: If 20, return unchanged.
+// NOTE: Enhancement does not affect durability.
 function success(item) {
-  return { ...item };
+  if (item.enhancement === 20) {
+    return { ...item };
+  } 
+    const betterItem = repair(item);
+    return { ...betterItem, enhancement: betterItem.enhancement + 1 };
 }
 
 function fail(item) {
