@@ -12,12 +12,27 @@ module.exports = {
 function success(item) {
   if (item.enhancement === 20) {
     return { ...item };
-  } 
-    const betterItem = repair(item);
-    return { ...betterItem, enhancement: betterItem.enhancement + 1 };
+  } else {
+    item.enhancement++;
+    return { ...item };
+  }
 }
 
+// 1) Take in an item object.
+// 2) Reduce durability based on enhancement score.
+// NOTE: Reduced by 5 if enhancement is under 15.
+// NOTE: Reduced by 10 if enhancement is 15 or more.
+// NOTE: Enhancement is also reduced by 1 if score is 16+.
 function fail(item) {
+  if (item.enhancement < 15){
+    item.durability -= 5;
+  } else if (item.enhancement >= 15){
+    item.durability -= 10;
+  } 
+
+  if (item.enhancement >= 16) {
+    item.enhancement -=1;
+  }
   return { ...item };
 }
 
